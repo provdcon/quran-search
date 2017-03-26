@@ -24,20 +24,17 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 @RequestMapping("quran")
 @Slf4j
-//@EnableAutoConfiguration
 public class QuranicContentController {
-
-    @Autowired
-    RestTemplate restTemplate;
 
     @Value("${quran.json.path}")
     private Resource quranJsonFileURI;
 
     private StorageService storageService;
 
-    public QuranicContentController(){
+    @Autowired
+    public QuranicContentController(StorageService storageService){
 
-        storageService = new StorageService(restTemplate);
+        this.storageService = storageService;
     }
 
     @GetMapping("/load")
